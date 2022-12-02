@@ -1,6 +1,5 @@
 """All the underlying classes used in the R/P/S game"""
 import abc
-
 from enum import Enum
 
 
@@ -18,12 +17,6 @@ class ActionVars(Enum):
 
 class Action(abc.ABC):
     """Abstract class for a "move" in the game"""
-
-    def __init__(self):
-        self._move_type = self.move_type
-        self._weak_against = self.weak_against
-        self._strong_against = self.strong_against
-        self._move_value = self.move_value
 
     @property
     @abc.abstractmethod
@@ -53,9 +46,6 @@ class Action(abc.ABC):
 class Rock(Action):
     """The Mighty Rock"""
 
-    def __init__(self):
-        super().__init__()
-
     @property
     def move_type(self) -> ActionVars:
         """I am ROCK"""
@@ -80,9 +70,6 @@ class Rock(Action):
 class Paper(Action):
     """The Unsuspecting Paper"""
 
-    def __init__(self):
-        super().__init__()
-
     @property
     def move_type(self) -> ActionVars:
         """I am PAPER"""
@@ -106,9 +93,6 @@ class Paper(Action):
 
 class Scissors(Action):
     """The Crafty Scissors"""
-
-    def __init__(self):
-        super().__init__()
 
     @property
     def move_type(self) -> ActionVars:

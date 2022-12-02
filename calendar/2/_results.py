@@ -1,6 +1,5 @@
 """Objects representing the state of each round"""
 import abc
-
 from enum import Enum
 
 
@@ -19,10 +18,6 @@ class ResultVars(Enum):
 class Result(abc.ABC):
     """Result of a Round of the R/P/S Game"""
 
-    def __init__(self):
-        self._result = self.result
-        self._result_value = self.result_value
-
     @property
     @abc.abstractmethod
     def result(self) -> ResultVars:
@@ -39,9 +34,6 @@ class Result(abc.ABC):
 class Win(Result):
     """You Won!"""
 
-    def __init__(self):
-        super().__init__()
-
     @property
     def result(self) -> ResultVars:
         """I am a WIN"""
@@ -56,9 +48,6 @@ class Win(Result):
 class Draw(Result):
     """You Drew :/"""
 
-    def __init__(self):
-        super().__init__()
-
     @property
     def result(self) -> ResultVars:
         """I am a DRAW"""
@@ -72,9 +61,6 @@ class Draw(Result):
 
 class Lose(Result):
     """You Lose :("""
-
-    def __init__(self):
-        super().__init__()
 
     @property
     def result(self) -> ResultVars:
