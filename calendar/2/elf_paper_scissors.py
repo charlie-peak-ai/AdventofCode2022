@@ -1,10 +1,10 @@
-"""Task 2"""
-from typing import TextIO
+"""https://adventofcode.com/2022/day/2"""
 import logging
+from typing import TextIO
 
 from _exceptions import ActionsError, ResultsError
-from _moves import Action, Rock, Paper, Scissors, ActionVars
-from _results import Result, Win, Draw, Lose, ResultVars
+from _moves import Action, ActionVars, Paper, Rock, Scissors
+from _results import Draw, Lose, Result, ResultVars, Win
 
 logging.basicConfig(level=logging.INFO)
 
@@ -96,9 +96,7 @@ class RPSSimulator:
             return Lose()
 
         else:
-            raise ActionsError(
-                f"Unexpected outcome between: {player_one_move.move_type} & {player_two_move.move_type}"
-            )
+            raise ActionsError(f"Unexpected outcome between: {player_one_move.move_type} & {player_two_move.move_type}")
 
     @staticmethod
     def calc_score(move: Action, result: Result) -> int:
@@ -129,9 +127,7 @@ class RPSSimulator:
             me = them.strong_against
 
         else:
-            raise ResultsError(
-                f"Unexpected Result.result value: {desired_outcome.result}"
-            )
+            raise ResultsError(f"Unexpected Result.result value: {desired_outcome.result}")
 
         return self._var_name_to_class.get(me)
 

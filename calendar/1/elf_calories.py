@@ -1,12 +1,9 @@
+"""https://adventofcode.com/2022/day/1"""
 from typing import TextIO
 
 
 class ElfCalories:
-    """
-    Day 1
-
-    https://adventofcode.com/2022/day/1
-    """
+    """Calorie Finder"""
 
     def __init__(self):
         self.text_file = "input.txt"
@@ -74,5 +71,5 @@ class ElfCalories:
         print(f"Elf: {elf_number + 1} brought {self.elf_list[elf_number]} calories")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     ElfCalories()
