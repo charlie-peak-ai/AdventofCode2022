@@ -16,10 +16,8 @@ class RucksackSorter(AdventOfCode):
 
     def task_one(self) -> None:
         """Compares the two rucksack compartments for common elements and values them"""
-        raw_data = self._open_file()
-        rucksack_list = self._strip_data(raw_data)
         value_list = []
-        for rucksack in rucksack_list:
+        for rucksack in self.text_file:
             rucksack_half_point = len(rucksack) // 2
             compartment_1, compartment_2 = rucksack[:rucksack_half_point], rucksack[rucksack_half_point:]
             common_elements = self.find_intersection([compartment_1, compartment_2])
@@ -30,11 +28,9 @@ class RucksackSorter(AdventOfCode):
     def task_two(self) -> None:
         """Identify the item that is in all bags per 3 elf groupings"""
         print("=" * 20)
-        raw_data = self._open_file()
-        rucksack_list = self._strip_data(raw_data)
 
         value_list = []
-        grouped_rucksacks = self.group_elves(rucksack_list)
+        grouped_rucksacks = self.group_elves(self.text_file)
         for group in grouped_rucksacks:
             common_elements = self.find_intersection(group)
             value_list.extend(self.find_and_value_occurrences(common_elements))
