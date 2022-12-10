@@ -38,7 +38,8 @@ class CampCleanup(AdventOfCode):
 
         return expanded_list
 
-    def find_full_overlaps(self, expanded_list: list):
+    @staticmethod
+    def find_full_overlaps(expanded_list: list):
         """Checks if a section pairing FULLY contains the other"""
         overlap_count = 0
         for elf_pairing in expanded_list:
