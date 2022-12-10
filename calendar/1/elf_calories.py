@@ -1,12 +1,13 @@
 """https://adventofcode.com/2022/day/1"""
-from typing import TextIO
+from calendar import AdventOfCode
+from typing import List
 
 
-class ElfCalories:
+class ElfCalories(AdventOfCode):
     """Calorie Finder"""
 
     def __init__(self):
-        self.text_file = "input.txt"
+        super().__init__()
         self.elf_list = None
 
         self.main()
@@ -14,8 +15,7 @@ class ElfCalories:
     def main(self) -> None:
         """Main function"""
 
-        data = self.open_file()
-        self.elf_list = self.sum_calories(data)
+        self.elf_list = self.sum_calories(self.text_file)
 
         print("==== Task 1 ====")
         self.find_top_n_elves(1)
@@ -23,13 +23,8 @@ class ElfCalories:
         print("==== Task 2 ====")
         self.find_top_n_elves()
 
-    def open_file(self) -> TextIO:
-        """Opens the file into memory"""
-        raw_data = open(self.text_file)
-        return raw_data
-
     @staticmethod
-    def sum_calories(data: TextIO) -> list:
+    def sum_calories(data: List[str]) -> list:
         """
         Iterates over the opened file, stripping the read-in lines of any line breaks and summing the values.
 
@@ -38,8 +33,7 @@ class ElfCalories:
         """
         elf_list = []
         current_cals = 0
-        for row in data.readlines():
-            row = row.strip()
+        for row in data:
 
             if row == "":
                 elf_list.append(current_cals)

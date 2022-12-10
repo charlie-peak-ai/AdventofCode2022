@@ -1,14 +1,14 @@
 """https://adventofcode.com/2022/day/3"""
-import logging
 import string
-from typing import List, TextIO
+from calendar import AdventOfCode
+from typing import List
 
 
-class RucksackSorter:
+class RucksackSorter(AdventOfCode):
     """Finds common elements in strings"""
 
     def __init__(self):
-        self.text_file = "input.txt"
+        super().__init__()
         self.priority_dict = self._priority()
 
         self.task_one()
@@ -86,21 +86,6 @@ class RucksackSorter:
             priority_dict[i] = e
 
         return priority_dict
-
-    def _open_file(self) -> TextIO:
-        """Opens the file into memory"""
-        logging.debug(f"Opening file: {self.text_file}")
-        raw_data = open(self.text_file)
-
-        return raw_data
-
-    @staticmethod
-    def _strip_data(raw_data: TextIO) -> List[str]:
-        """Iterates over the raw TextIO object and writes stripped lines to a list"""
-        stripped_data = []
-        for row in raw_data:
-            stripped_data.append(row.strip())
-        return stripped_data
 
 
 if __name__ == "__main__":

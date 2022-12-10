@@ -1,5 +1,6 @@
 """https://adventofcode.com/2022/day/2"""
 import logging
+from calendar import AdventOfCode
 from typing import TextIO
 
 from _exceptions import ActionsError, ResultsError
@@ -9,11 +10,11 @@ from _results import Draw, Lose, Result, ResultVars, Win
 logging.basicConfig(level=logging.INFO)
 
 
-class RPSSimulator:
+class RPSSimulator(AdventOfCode):
     """Rock, Paper, Scissors Simulator"""
 
     def __init__(self):
-        self.text_file = "input.txt"
+        super().__init__()
 
         self._var_name_to_class = {
             ResultVars.LOSE: Lose(),
@@ -34,10 +35,9 @@ class RPSSimulator:
     def task_one(self) -> None:
         """Task one, simulate on the assumption the XYZ values are my moves."""
         logging.info("Task 1")
-        raw_data = self._open_file()
         my_score = 0
-        for row in raw_data.readlines():
-            them, me = row.strip().split(" ")
+        for row in self.text_file:
+            them, me = row.split(" ")
 
             them = self._move_code_translation(them)
             me = self._move_code_translation(me)
@@ -56,10 +56,9 @@ class RPSSimulator:
     def task_two(self) -> None:
         """Task two, convert the XYZ to the result I need and simulate that"""
         logging.info("Task 2")
-        raw_data = self._open_file()
         my_score = 0
-        for row in raw_data.readlines():
-            them, desired_outcome = row.strip().split(" ")
+        for row in self.text_file:
+            them, desired_outcome = row.split(" ")
 
             them = self._move_code_translation(them)
             desired_outcome = self._desired_outcome_translation(desired_outcome)
@@ -130,13 +129,6 @@ class RPSSimulator:
             raise ResultsError(f"Unexpected Result.result value: {desired_outcome.result}")
 
         return self._var_name_to_class.get(me)
-
-    def _open_file(self) -> TextIO:
-        """Opens the file into memory"""
-        logging.debug(f"Opening file: {self.text_file}")
-        raw_data = open(self.text_file)
-
-        return raw_data
 
     def _move_code_translation(self, move_code: str) -> Action:
         """Converts a move code string to a Variable type, then returns a Result Object"""
