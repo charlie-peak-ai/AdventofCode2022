@@ -1,7 +1,7 @@
 """https://adventofcode.com/2022/day/5"""
 import re
 from calendar import AdventOfCode
-from typing import Collection, List, Tuple
+from typing import List, Tuple
 
 
 class SupplyStacks(AdventOfCode):
@@ -93,15 +93,10 @@ class SupplyStacks(AdventOfCode):
         parsed_crate_list = []
         for row in self.text_file:
             if "[" in row:
-                new_row = self.chunker(row.replace("\n", ""), 4)
+                new_row = self.chunker(row.replace("\n", ""), 4, distinct_groups=True)
                 parsed_crate_list.append(list(new_row))
 
         return parsed_crate_list
-
-    @staticmethod
-    def chunker(seq: Collection, size: int):
-        """Takes any iterable and steps through it in chunks"""
-        return (seq[pos : pos + size] for pos in range(0, len(seq), size))
 
     @staticmethod
     def _convert_to_stack_dict(parsed_crate_list: list) -> dict:

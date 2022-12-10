@@ -1,5 +1,5 @@
 import logging
-from typing import List, TextIO
+from typing import Collection, Generator, List, TextIO
 
 
 class AdventOfCode:
@@ -27,3 +27,21 @@ class AdventOfCode:
             else:
                 stripped_data.append(row)
         return stripped_data
+
+    @staticmethod
+    def chunker(seq: Collection, size: int, distinct_groups: bool = True) -> Generator:
+        """
+        Takes any iterable and steps through it in chunks
+
+        Notes
+        ------
+        If distinct groups is selected then it will step forward through the iterable.
+        Eg "abcdefghi" with size 3 would become "abc", "def", "ghi" etc
+
+        Otherwise, will step forward by 1 position each time.
+        Eg "abcdefghi" with size 3 would become "abc", "bcd", "cde" etc
+        """
+        if distinct_groups:
+            return (seq[pos : pos + size] for pos in range(0, len(seq), size))
+        else:
+            return (seq[pos : pos + size] for pos in range(0, len(seq)))
